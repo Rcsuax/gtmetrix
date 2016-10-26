@@ -1,0 +1,10 @@
+out/
+build/
+config.properties  
+.git/
+gradle/  
+.gradle/  
+gradlew  
+gradlew.bat  
+.idea/  
+settings.gradle
