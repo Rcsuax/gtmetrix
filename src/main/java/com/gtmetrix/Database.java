@@ -14,7 +14,7 @@ public class Database {
 			Properties config = new Properties();
 
 		try {
-			InputStream in = new FileInputStream("/home/reuben/work/java_unit/config.properties");
+			InputStream in = new FileInputStream("/home/reuben/work/gtmetrix/config.properties");
 			config.load(in);
 			String db_user = config.getProperty("db_user");
 			String db_pass = config.getProperty("db_password");
@@ -59,8 +59,7 @@ public class Database {
 
     public void updateDatabase(Deal deal) {
         System.out.println("Updating Deals");
-        try {
-        	Connection connection = getConnection();
+        try (Connection connection = getConnection()){
             PreparedStatement stmt = connection.prepareStatement("INSERT INTO Deals(dealId,startDate,endDate,dealUrl,productType) VALUES(?,?,?,?,?)");
 
             stmt.setString(1, deal.getId());

@@ -22,7 +22,7 @@ public class EmailSender {
 		Properties config = new Properties();
 
 		try {
-			InputStream in = new FileInputStream("/home/reuben/work/java_unit/config.properties");
+			InputStream in = new FileInputStream("/home/reuben/work/gtmetrix/config.properties");
 			config.load(in);
 			final String username = config.getProperty("sender");
 			final String password = config.getProperty("password");

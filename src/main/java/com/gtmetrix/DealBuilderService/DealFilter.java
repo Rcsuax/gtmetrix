@@ -19,7 +19,7 @@ public class DealFilter extends Database {
 			//Run test if sale starts within 24? hours
 
 			if(st.isAfterNow() && st.isBefore(day)) {
-				System.out.println("saving deal " + deal);
+				System.out.println("saving deal " + deal.getId());
 				save(deal);
 			}
 

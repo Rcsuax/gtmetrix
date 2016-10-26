@@ -29,7 +29,7 @@ public abstract class HttpUtils {
 		Properties config = new Properties();
 
 		try {
-			InputStream in = new FileInputStream("/home/reuben/work/java_unit/config.properties");
+			InputStream in = new FileInputStream("/home/reuben/work/gtmetrix/config.properties");
 			config.load(in);
 			String user = config.getProperty("api_user");
 			String api_key = config.getProperty("api_key");
