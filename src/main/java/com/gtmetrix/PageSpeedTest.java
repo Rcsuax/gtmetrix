@@ -55,7 +55,7 @@ public class PageSpeedTest extends HttpUtils {
 			String getJsonData = readHttpResponse(response);
 
 			TestResult testResult = gson.fromJson(getJsonData, TestResult.class);
-			if (!Objects.equals(testResult.state, "completed") && !Objects.equals(testResult.error, "Test not found")) {
+			if (!Objects.equals(testResult.state, "completed") || !Objects.equals(testResult.error, "Test not found") || !Objects.equals(testResult.error,"Invalid e-mail and/or API key")) {
 				pause(1);
 				testResult = getTestResult(postData);
 			}

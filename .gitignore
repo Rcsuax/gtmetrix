@@ -1,10 +1,17 @@
-out/
+ .gradle/
+
+.idea/
+
 build/
-config.properties  
-.git/
-gradle/  
-.gradle/  
-gradlew  
+
+gradle/
+
+out/
+
+config.properties
+
+gradlew
+
 gradlew.bat  
-.idea/  
+
 settings.gradle

@@ -24,7 +24,7 @@ public class EmailSender {
 		try {
 			InputStream in = new FileInputStream("/home/reuben/work/gtmetrix/config.properties");
 			config.load(in);
-			final String username = config.getProperty("sender");
+			final String username = config.getProperty("email");
 			final String password = config.getProperty("password");
 			final String recipient = config.getProperty("recipient");
 
