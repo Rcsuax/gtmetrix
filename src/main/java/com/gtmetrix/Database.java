@@ -14,7 +14,7 @@ public class Database {
 			Properties config = new Properties();
 
 		try {
-			InputStream in = new FileInputStream("/home/reuben/work/gtmetrix/config.properties");
+			InputStream in = ClassLoader.getSystemResourceAsStream("config.properties");
 			config.load(in);
 			String db_user = config.getProperty("db_user");
 			String db_pass = config.getProperty("db_password");
