@@ -9,7 +9,7 @@ public class CheckThreshold {
     public List<TestResult> checkTestsForThresholdBreaches(List<TestResult> testResults) {
 		List<TestResult> listResult = new ArrayList<>();
     	for (TestResult result : testResults){
-			if(filterHtmlDownloadTime(result) && filterPageLoadTime(result)) {
+			if(filterHtmlDownloadTime(result) || filterPageLoadTime(result)) {
 				listResult.add(result);
 			}
 		}
@@ -20,6 +20,6 @@ public class CheckThreshold {
 	}
 
 	private boolean filterPageLoadTime(TestResult result){
-		return result.getPageLoadTime() < 9000;
+		return result.getPageLoadTime() > 9000;
 	}
 }
