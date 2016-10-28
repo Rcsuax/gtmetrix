@@ -6,19 +6,22 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public final class Deal {
+public class Deal {
 
-    private final String id;
+    private String id;
 
-	private final Date endDate;
+	private Date startDate;
 
-	private final Date startDate;
+	private Date endDate;
 
-    private final String url;
+    private String url;
 
-    private final String productType;
+    private String productType;
 
-    private Deal(Element element) throws ParseException {
+    public Deal(){}
+
+    public Deal(Element element) throws ParseException {
+
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
 
         id = element.getAttribute("id");
@@ -31,10 +34,6 @@ public final class Deal {
 
 		productType= element.getElementsByTagName("product_type").item(0).getTextContent();
     }
-
-    public static Deal getInstance(Element element) throws ParseException {
-    	return new Deal(element);
-	}
 
 	public String getId(){
 		return id;

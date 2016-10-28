@@ -11,7 +11,8 @@ public class Main {
 		List<Deal> dealList = XmlDealBuilder.getListOfDeals();
 
 		DealFilter dealFilter = new DealFilter();
-		dealFilter.filterUpcomingDeals(dealList);
+		List<Deal> persistDeals = dealFilter.filterUpcomingDeals(dealList);
+		dealFilter.save(persistDeals);
 
 
 		Query query = new Query();

@@ -60,7 +60,7 @@ public class XmlDealBuilder {
                     Element element = (Element) node;
 
                     try {
-                        Deal deal = Deal.getInstance(element);
+                        Deal deal = new Deal(element);
                         deal.printDeal();
                         dealList.add(deal);
                     }

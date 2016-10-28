@@ -5,29 +5,31 @@ import com.gtmetrix.Deal;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DealFilter extends Database {
 
-    public void filterUpcomingDeals(List<Deal> dealList){
-		for (Deal deal: dealList){
-			DateTime st = new DateTime(deal.getStartDate().getTime()),
-					day = new DateTime(DateTimeZone.UTC);
+    public List<Deal> filterUpcomingDeals(List<Deal> dealList){
+		List<Deal> filteredList = new ArrayList<>();
+    	for (Deal deal: dealList){
 
-			st = st.withTimeAtStartOfDay();
-			day = day.plusHours(24).withTimeAtStartOfDay();
-			//Run test if sale starts within 24? hours
+			DateTime st = new DateTime(deal.getStartDate().getTime()).withTimeAtStartOfDay();
+			DateTime day = new DateTime(DateTimeZone.UTC).plusHours(24).withTimeAtStartOfDay();
 
 			if(st.isAfterNow() && st.isBefore(day)) {
-				System.out.println("saving deal " + deal.getId());
-				save(deal);
+				filteredList.add(deal);
 			}
 
 			else System.out.println("Deal " + deal.getId() + " does not pass rules");
 		}
+		return filteredList;
 	}
 
-    private void save(Deal deal){
-        updateDatabase(deal);
+    public void save(List<Deal> deals) {
+        for (Deal deal : deals){
+			System.out.println("saving deal " + deal.getId());
+			updateDatabase(deal);
+		}
     }
 }
