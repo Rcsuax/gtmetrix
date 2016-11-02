@@ -2,26 +2,33 @@ package com.gtmetrix.DealBuilderService;
 
 import com.gtmetrix.Database;
 import com.gtmetrix.Deal;
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class DealFilter extends Database {
 
     public List<Deal> filterUpcomingDeals(List<Deal> dealList){
 		List<Deal> filteredList = new ArrayList<>();
     	for (Deal deal: dealList){
+			try {
+				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+				Date now = dateFormat.parse(dateFormat.format(new Date()));
+				Date before = new Date(now.getTime() + TimeUnit.HOURS.toMillis(25));
 
-			DateTime st = new DateTime(deal.getStartDate().getTime()).withTimeAtStartOfDay();
-			DateTime day = new DateTime(DateTimeZone.UTC).plusHours(24).withTimeAtStartOfDay();
-
-			if(st.isAfterNow() && st.isBefore(day)) {
-				filteredList.add(deal);
+				if(deal.getStartDate().after(now) && deal.getStartDate().before(before)){
+					filteredList.add(deal);
+				}
+				else System.out.println("Deal " + deal.getId() + " does not pass rules " + deal.getStartDate());
 			}
-
-			else System.out.println("Deal " + deal.getId() + " does not pass rules");
+			catch (ParseException e){
+				System.out.println(e.getMessage());
+			}
 		}
 		return filteredList;
 	}

@@ -32,7 +32,8 @@ public class PageSpeedTest extends HttpUtils {
 				Query query = new Query();
 				query.markDealTested();
 
-			} catch (NullPointerException e) {
+			} catch (NullPointerException | InvalidTestStateException e) {
+				System.out.println(e.getMessage());
 				System.out.println("Unable to get test result for " + message.url);
 			}
 		}
@@ -47,7 +48,7 @@ public class PageSpeedTest extends HttpUtils {
 		}
 	}
 
-	private TestResult getTestResult(PostData postData) throws NullPointerException {
+	private TestResult getTestResult(PostData postData) throws NullPointerException,InvalidTestStateException {
 		Gson gson = new Gson();
 		if (postData.test_id != null) {
 			HttpGet httpget = httpGetBuilder(postData.test_id);
@@ -55,7 +56,11 @@ public class PageSpeedTest extends HttpUtils {
 			String getJsonData = readHttpResponse(response);
 
 			TestResult testResult = gson.fromJson(getJsonData, TestResult.class);
-			if (!Objects.equals(testResult.state, "completed") || !Objects.equals(testResult.error, "Test not found") || !Objects.equals(testResult.error,"Invalid e-mail and/or API key")) {
+			if(!Objects.equals(testResult.error, "")){
+				throw new InvalidTestStateException(testResult.error);
+			}
+
+			if (!Objects.equals(testResult.state, "completed")) {
 				pause(1);
 				testResult = getTestResult(postData);
 			}
