@@ -5,16 +5,29 @@ import spock.lang.Specification
 class CheckThresholdTest extends Specification {
 
 	def checkThreshold
-	def mockTestResultOne
-	def mockTestResultTwo
-	def mockTestResultThree
+
+	TestResult mockTestResultOne
+
+	TestResult mockTestResultTwo
+
+	TestResult mockTestResultThree
 
 	def setup() {
 		checkThreshold = new CheckThreshold()
 
-		mockTestResultOne = Mock(TestResult)
-		mockTestResultTwo = Mock(TestResult)
-		mockTestResultThree = Mock(TestResult)
+		mockTestResultOne = Stub {
+			getHtmlDownloadTime() >> 200
+			getPageLoadTime() >> 6000
+		}
+
+		mockTestResultTwo = Stub {
+			getHtmlDownloadTime() >> 500
+			getPageLoadTime() >> 12000
+		}
+		mockTestResultThree = Stub {
+			getHtmlDownloadTime() >> 500
+			getPageLoadTime() >> 6000
+		}
 	}
 
 	def "Takes a list of test results and returns a list of test results"() {
@@ -29,18 +42,6 @@ class CheckThresholdTest extends Specification {
 
 	def "Takes a list of deals and returns the deals which do not meet the criteria"() {
 		given:
-			//Pass and should not be returned
-			mockTestResultOne.getHtmlDownloadTime() >> 200
-			mockTestResultOne.getPageLoadTime() >> 6000
-
-			//Fail and be returned within a list
-			mockTestResultTwo.getHtmlDownloadTime() >> 500
-			mockTestResultTwo.getPageLoadTime() >> 12000
-
-			//Fail and be returned within a list
-			mockTestResultThree.getHtmlDownloadTime() >> 500
-			mockTestResultThree.getPageLoadTime() >> 6000
-
 			def testResults = [mockTestResultOne, mockTestResultTwo, mockTestResultThree]
 
 		when:
