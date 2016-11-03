@@ -56,7 +56,7 @@ public class PageSpeedTest extends HttpUtils {
 			String getJsonData = readHttpResponse(response);
 
 			TestResult testResult = gson.fromJson(getJsonData, TestResult.class);
-			if(!Objects.equals(testResult.error, "")){
+			if(!testResult.error.isEmpty()){
 				throw new InvalidTestStateException(testResult.error);
 			}
 

@@ -3,6 +3,7 @@ package com.gtmetrix;
 import com.gtmetrix.DealBuilderService.DealFilter;
 import com.gtmetrix.DealBuilderService.XmlDealBuilder;
 
+import java.io.IOException;
 import java.util.List;
 
 public class Main {
@@ -29,7 +30,7 @@ public class Main {
 			EmailSender sender = new EmailSender();
 			sender.send(report);
 		}
-		catch (IllegalArgumentException e){
+		catch (IllegalArgumentException | IOException e){
 			System.out.println(e.getMessage());
 		}
 	}

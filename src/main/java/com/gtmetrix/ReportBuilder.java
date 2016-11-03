@@ -1,20 +1,32 @@
 package com.gtmetrix;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
+import java.util.Properties;
 
 public class ReportBuilder {
 
-	public static String generateReport(List<TestResult> results) {
+	public static String generateReport(List<TestResult> results) throws IOException {
 		if (results.isEmpty()){
 			throw new IllegalArgumentException("No test results available");
 		}
+
+		Properties config = new Properties();
+		InputStream in = ClassLoader.getSystemResourceAsStream("config.properties");
+		config.load(in);
+		final String user = config.getProperty("api_user");
+		final String key = config.getProperty("api_key");
+
+
 		StringBuilder output = new StringBuilder("<h1>Sales that break the threshold: </h1>");
 		for (TestResult tr : results){
+			String url = tr.resources.getStrippedReportPdfFull();
 			output.append(String.format("%n<p>Deal Id: <b>%s</b> with a Html download time of %d ms</p>",tr.getDealId(),tr.getHtmlDownloadTime()));
 			output.append(String.format("%n<p>Html size: %s bytes</p>",tr.results.html_bytes));
 			output.append(String.format("%n<p>Page load time : %d ms</p>",tr.getPageLoadTime()));
 			output.append(String.format("%n<p>Product Type : %s </p>",tr.getProductType()));
-			output.append(String.format("%n<p>Full Report view here: <a href='tech@secretescapes.com:dad9fac6b581bfe9af30452f3b7e0487@%s'>Sale Report</a> </p><hr>%n",tr.resources.report_pdf_full));
+			output.append(String.format("%n<p>Download Full Report here: <a href='%s?username=%s&password=%s'>Sale Report</a> </p><hr>%n",url,user,key));
 		}
 		return output.toString();
 	}

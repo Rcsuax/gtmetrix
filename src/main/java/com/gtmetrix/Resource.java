@@ -8,4 +8,8 @@ public class Resource {
 	public String report_pdf_full;
 	public String yslow;
 	public String screenshot;
+
+	public String getStrippedReportPdfFull(){
+		return report_pdf_full.replaceFirst("https://","");
+	}
 }
