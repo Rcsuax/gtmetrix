@@ -1,7 +1,5 @@
 package com.gtmetrix;
 
-import org.joda.time.DateTime;
-
 import java.io.*;
 import java.sql.*;
 
@@ -44,7 +42,7 @@ public class Database {
 			stmt.setInt(9,Integer.parseInt(data.results.pagespeed_score));
 			stmt.setInt(10,Integer.parseInt(data.results.yslow_score));
 			stmt.setString(11,message.productType);
-			stmt.setDate(12,jodaToSql(DateTime.now()));
+			stmt.setDate(12,toSqlDate(new java.util.Date()));
 
 			stmt.executeUpdate();
 		}
@@ -82,9 +80,5 @@ public class Database {
 
     public static Date toSqlDate(java.util.Date date) {
         return new java.sql.Date(date.getTime());
-    }
-
-    public static java.sql.Date jodaToSql(DateTime dateTime) {
-        return new Date(dateTime.toDateTime().getMillis());
     }
 }
