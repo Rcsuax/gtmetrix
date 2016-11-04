@@ -23,11 +23,11 @@ dependencies {
 
 task fatJar(type: Jar) {
 	manifest {
-		attributes 'Implementation-Title': 'Gradle Jar File Example',
+		attributes 'Implementation-Title': 'Gradle Jar',
 				'Implementation-Version': version,
 				'Main-Class': 'com.gtmetrix.Main'
 	}
 	baseName = project.name
-	from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+	from { configurations.compile.collect { it.isDirectory(  b) ? it : zipTree(it) } }
 	with jar
 }
