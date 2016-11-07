@@ -16,10 +16,10 @@ public class CheckThreshold {
         return listResult;
     }
     private boolean filterHtmlDownloadTime(TestResult result){
-    	return result.getHtmlDownloadTime() > 300;
+    	return result.getHtmlDownloadTime() > 250;
 	}
 
 	private boolean filterPageLoadTime(TestResult result){
-		return result.getPageLoadTime() > 9000;
+		return result.getPageLoadTime() > 8000;
 	}
 }

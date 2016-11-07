@@ -12,32 +12,36 @@ public class PageSpeedTest extends HttpUtils {
 
 	public List<TestResult> testAllDeals(List<Message> queue) {
 		List<TestResult> testResults = new ArrayList<>();
-		Gson gson = new Gson();
-		Database database = new Database();
 		for (Message message : queue) {
-
-			CloseableHttpResponse response = sendHttpRequest(getHttpPost(), message.url);
-			String postJsonData = readHttpResponse(response);
-
-			PostData postData = gson.fromJson(postJsonData, PostData.class);
-
-			try {
-				TestResult addResult = getTestResult(postData);
-				addResult.setDealId(message.dealId);
-				addResult.setProductType(message.productType);
-
-				database.updateDatabase(addResult, message);
-				testResults.add(addResult);
-
-				Query query = new Query();
-				query.markDealTested();
-
-			} catch (NullPointerException | InvalidTestStateException e) {
-				System.out.println(e.getMessage());
-				System.out.println("Unable to get test result for " + message.url);
-			}
+			testResults.add(testOneDeal(message));
 		}
 		return testResults;
+	}
+
+	public TestResult testOneDeal(Message message){
+		Gson gson = new Gson();
+		Database database = new Database();
+		CloseableHttpResponse response = sendHttpRequest(getHttpPost(), message.url);
+		String postJsonData = readHttpResponse(response);
+
+		PostData postData = gson.fromJson(postJsonData, PostData.class);
+
+		try {
+			TestResult addResult = getTestResult(postData);
+			addResult.setDealId(message.dealId);
+			addResult.setProductType(message.productType);
+
+			database.updateDatabase(addResult, message);
+
+			Query query = new Query();
+			query.markDealTested();
+			return addResult;
+
+		} catch (NullPointerException | InvalidTestStateException e) {
+			System.out.println(e.getMessage());
+			System.out.println("Unable to get test result for " + message.url);
+			return null;
+		}
 	}
 
 	private void pause(int seconds) {
