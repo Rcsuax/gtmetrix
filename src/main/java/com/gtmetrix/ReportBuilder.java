@@ -22,10 +22,12 @@ public class ReportBuilder {
 		StringBuilder output = new StringBuilder("<h1>Sales that break the threshold: </h1>");
 		for (TestResult tr : results){
 			String url = tr.resources.getStrippedReportPdfFull();
-			output.append(String.format("%n<p>Deal Id: <b>%s</b> with a Html download time of %d ms</p>",tr.getDealId(),tr.getHtmlDownloadTime()));
+			output.append(String.format("%n<p>Deal Id: <b>%s</b><p>",tr.getDealId()));
+			output.append(String.format("<p>Html download time of %d ms</p>",tr.getHtmlDownloadTime()));
 			output.append(String.format("%n<p>Html size: %s bytes</p>",tr.results.html_bytes));
 			output.append(String.format("%n<p>Page load time : %d ms</p>",tr.getPageLoadTime()));
 			output.append(String.format("%n<p>Product Type : %s </p>",tr.getProductType()));
+			output.append(String.format("Report Url: %s",tr.results.report_url));
 			output.append(String.format("%n<p>Download Full Report here: <a href='%s?username=%s&password=%s'>Sale Report</a> </p><hr>%n",url,user,key));
 		}
 		return output.toString();

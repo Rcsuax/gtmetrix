@@ -13,7 +13,8 @@ public class PageSpeedTest extends HttpUtils {
 	public List<TestResult> testAllDeals(List<Message> queue) {
 		List<TestResult> testResults = new ArrayList<>();
 		for (Message message : queue) {
-			testResults.add(testOneDeal(message));
+			TestResult tr = testOneDeal(message);
+			if (tr != null) testResults.add(tr);
 		}
 		return testResults;
 	}
