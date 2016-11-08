@@ -46,7 +46,7 @@ public class EmailSender {
 			javax.mail.Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(username));
 			message.setRecipients(javax.mail.Message.RecipientType.TO, InternetAddress.parse(recipient));
-			message.setSubject("Test Subject");
+			message.setSubject("Gtmetrix Report");
 			message.setContent(report, "text/html; charset=utf-8");
 			Transport.send(message);
 
