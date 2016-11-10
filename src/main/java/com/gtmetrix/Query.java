@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Query extends Database {
+public class Query implements Database {
 
 	public List<Message> getAllDeals(){
 		String query ="SELECT dealId,dealUrl,productType FROM Deals WHERE testCompletion IS FALSE";

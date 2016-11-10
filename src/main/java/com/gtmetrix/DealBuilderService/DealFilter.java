@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class DealFilter extends Database {
+public class DealFilter implements Database {
 
     public List<Deal> filterUpcomingDeals(List<Deal> dealList){
 		List<Deal> filteredList = new ArrayList<>();

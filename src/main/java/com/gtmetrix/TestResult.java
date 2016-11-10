@@ -11,27 +11,9 @@ public class TestResult {
 
 	public Result results;
 
-	private String dealId;
-
 	private String testId;
 
-	private String productType;
-
-	public void setProductType(String productType) {
-		this.productType = productType;
-	}
-
-	public String getProductType() {
-		return productType;
-	}
-
-	public String getDealId() {
-		return dealId;
-	}
-
-	public void setDealId(String dealId) {
-		this.dealId = dealId;
-	}
+	public Message message;
 
 	public void setTestId(String testId) {
 		this.testId = testId;

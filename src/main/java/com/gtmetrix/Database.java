@@ -6,9 +6,9 @@ import java.sql.*;
 import java.sql.Date;
 import java.util.*;
 
-public class Database {
+public interface Database {
 
-    public Connection getConnection() throws SQLException {
+    default Connection getConnection() throws SQLException {
 			Properties config = new Properties();
 
 		try {
@@ -24,7 +24,7 @@ public class Database {
 		}
     }
 
-    public void updateDatabase(TestResult data, Message message){
+    default void updateDatabase(TestResult data){
 		System.out.println("updating TestResults");
 		try {
 			PreparedStatement stmt = getConnection().prepareStatement(
@@ -32,7 +32,7 @@ public class Database {
 			);
 
 			stmt.setString(1, data.getTestId());
-			stmt.setString(2, message.dealId);
+			stmt.setString(2, data.message.dealId);
 			stmt.setInt(3,Integer.parseInt(data.results.page_load_time));
 			stmt.setInt(4,Integer.parseInt(data.results.html_bytes));
 			stmt.setInt(5,Integer.parseInt(data.results.page_elements));
@@ -41,13 +41,13 @@ public class Database {
 			stmt.setInt(8,Integer.parseInt(data.results.page_bytes));
 			stmt.setInt(9,Integer.parseInt(data.results.pagespeed_score));
 			stmt.setInt(10,Integer.parseInt(data.results.yslow_score));
-			stmt.setString(11,message.productType);
+			stmt.setString(11,data.message.productType);
 			stmt.setDate(12,toSqlDate(new java.util.Date()));
 
 			stmt.executeUpdate();
 		}
 		catch (SQLException sq){
-			System.out.println("Error with :" + message.dealId);
+			System.out.println("Error with :" + data.message.dealId);
 
 			System.out.println("SQLException: " + sq.getMessage());
 			System.out.println("SQLState: " + sq.getSQLState());
@@ -55,7 +55,7 @@ public class Database {
 		}
     }
 
-    public void updateDatabase(Deal deal) {
+    default void updateDatabase(Deal deal) {
         System.out.println("Updating Deals");
         try (Connection connection = getConnection()){
             PreparedStatement stmt = connection.prepareStatement("INSERT INTO Deals(dealId,startDate,endDate,dealUrl,productType) VALUES(?,?,?,?,?)");
@@ -78,7 +78,7 @@ public class Database {
         }
 	}
 
-    public static Date toSqlDate(java.util.Date date) {
+    static Date toSqlDate(java.util.Date date) {
         return new java.sql.Date(date.getTime());
     }
 }

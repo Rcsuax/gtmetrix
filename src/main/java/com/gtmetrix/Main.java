@@ -21,6 +21,7 @@ public class Main {
 
 		PageSpeedTest pageSpeed = new PageSpeedTest();
 		List<TestResult> testResults = pageSpeed.testAllDeals(testQueue);
+		pageSpeed.save(testResults);
 
 		CheckThreshold check = new CheckThreshold();
 		List<TestResult> failedThresholdCheck = check.checkTestsForThresholdBreaches(testResults);
