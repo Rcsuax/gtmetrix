@@ -41,13 +41,9 @@ public class PageSpeedTest extends HttpUtils implements Database {
 		}
 	}
 
-	public void save(TestResult testResult) {
-		updateDatabase(testResult);
-	}
-
-	public void save(List<TestResult> testResultList) {
+	public void saveAll(List<TestResult> testResultList) {
 		for (TestResult tr : testResultList){
-			updateDatabase(tr);
+			save(tr);
 		}
 	}
 

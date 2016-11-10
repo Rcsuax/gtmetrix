@@ -33,10 +33,10 @@ public class DealFilter implements Database {
 		return filteredList;
 	}
 
-    public void save(List<Deal> deals) {
+    public void saveAll(List<Deal> deals) {
         for (Deal deal : deals){
 			System.out.println("saving deal " + deal.getId());
-			updateDatabase(deal);
+			save(deal);
 		}
     }
 }

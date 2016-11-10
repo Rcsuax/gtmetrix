@@ -24,7 +24,7 @@ public interface Database {
 		}
     }
 
-    default void updateDatabase(TestResult data){
+    default void save(TestResult data){
 		System.out.println("updating TestResults");
 		try {
 			PreparedStatement stmt = getConnection().prepareStatement(
@@ -55,7 +55,7 @@ public interface Database {
 		}
     }
 
-    default void updateDatabase(Deal deal) {
+    default void save(Deal deal) {
         System.out.println("Updating Deals");
         try (Connection connection = getConnection()){
             PreparedStatement stmt = connection.prepareStatement("INSERT INTO Deals(dealId,startDate,endDate,dealUrl,productType) VALUES(?,?,?,?,?)");

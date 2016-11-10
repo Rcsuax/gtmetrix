@@ -13,7 +13,7 @@ public class Main {
 
 		DealFilter dealFilter = new DealFilter();
 		List<Deal> persistDeals = dealFilter.filterUpcomingDeals(dealList);
-		dealFilter.save(persistDeals);
+		dealFilter.saveAll(persistDeals);
 
 
 		Query query = new Query();
@@ -21,7 +21,7 @@ public class Main {
 
 		PageSpeedTest pageSpeed = new PageSpeedTest();
 		List<TestResult> testResults = pageSpeed.testAllDeals(testQueue);
-		pageSpeed.save(testResults);
+		pageSpeed.saveAll(testResults);
 
 		CheckThreshold check = new CheckThreshold();
 		List<TestResult> failedThresholdCheck = check.checkTestsForThresholdBreaches(testResults);
