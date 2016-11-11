@@ -1,19 +1,15 @@
 package com.gtmetrix;
 
-import com.gtmetrix.DealBuilderService.DealFilter;
-import com.gtmetrix.DealBuilderService.XmlDealBuilder;
-
 import java.io.IOException;
 import java.util.List;
 
 public class Main {
 	public static void main(String[] args) {
 
-		List<Deal> dealList = XmlDealBuilder.getListOfDeals();
-
-		DealFilter dealFilter = new DealFilter();
-		List<Deal> persistDeals = dealFilter.filterUpcomingDeals(dealList);
-		dealFilter.saveAll(persistDeals);
+		DealService service = new DealService();
+		List<Deal> dealList = service.getListOfDealsFromXML();
+		List<Deal> dealsToTest = service.filterUpcomingDeals(dealList);
+		service.saveAll(dealsToTest);
 
 
 		Query query = new Query();

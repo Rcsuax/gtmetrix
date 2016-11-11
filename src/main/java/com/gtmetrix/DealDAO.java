@@ -3,7 +3,7 @@ package com.gtmetrix;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-
+import java.util.List;
 
 
 public interface DealDAO extends Database {
@@ -30,4 +30,6 @@ public interface DealDAO extends Database {
 			System.out.println("VendorError: " + sq.getErrorCode());
 		}
 	}
+
+	void saveAll(List<Deal> deals);
 }
