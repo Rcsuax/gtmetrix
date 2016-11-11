@@ -1,7 +1,7 @@
 package com.gtmetrix.DealBuilderService;
 
-import com.gtmetrix.Database;
 import com.gtmetrix.Deal;
+import com.gtmetrix.DealDAO;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class DealFilter implements Database {
+public class DealFilter implements DealDAO {
 
     public List<Deal> filterUpcomingDeals(List<Deal> dealList){
 		List<Deal> filteredList = new ArrayList<>();

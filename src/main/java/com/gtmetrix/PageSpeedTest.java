@@ -8,7 +8,7 @@ import java.util.*;
 import java.util.concurrent.*;
 
 @SuppressWarnings("WeakerAccess")
-public class PageSpeedTest extends HttpUtils implements Database {
+public class PageSpeedTest extends HttpUtils implements TestResultDAO {
 
 	public List<TestResult> testAllDeals(List<Message> queue) {
 		List<TestResult> testResults = new ArrayList<>();

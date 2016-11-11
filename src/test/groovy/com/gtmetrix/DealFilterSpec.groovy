@@ -1,12 +1,12 @@
-package com.gtmetrix.DealBuilderService
+package com.gtmetrix
 
-import com.gtmetrix.Deal
+import com.gtmetrix.DealBuilderService.DealFilter
 import spock.lang.Specification
 
 import java.text.SimpleDateFormat
 
 
-class DealFilterTest extends Specification {
+class DealFilterSpec extends Specification {
 
 	def mockDealOne
 

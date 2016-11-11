@@ -1,18 +1,23 @@
 package com.gtmetrix
 
+import spock.lang.Shared
 import spock.lang.Specification
 
-class CheckThresholdTest extends Specification {
+class CheckThresholdSpec extends Specification {
 
+	@Shared
 	def checkThreshold
 
+	@Shared
 	TestResult mockTestResultOne
 
+	@Shared
 	TestResult mockTestResultTwo
 
+	@Shared
 	TestResult mockTestResultThree
 
-	def setup() {
+	def setupSpec() {
 		checkThreshold = new CheckThreshold()
 
 		mockTestResultOne = Stub {
