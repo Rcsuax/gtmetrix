@@ -2,6 +2,7 @@ package com.gtmetrix;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.List;
 
 public interface TestResultDAO extends Database {
 
@@ -35,4 +36,6 @@ public interface TestResultDAO extends Database {
 			System.out.println("VendorError: " + sq.getErrorCode());
 		}
 	}
+
+	void saveAll(List<TestResult> testResults);
 }

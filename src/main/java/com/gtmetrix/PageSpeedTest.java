@@ -41,20 +41,6 @@ public class PageSpeedTest extends HttpUtils implements TestResultDAO {
 		}
 	}
 
-	public void saveAll(List<TestResult> testResultList) {
-		for (TestResult tr : testResultList){
-			save(tr);
-		}
-	}
-
-	private void pause(int seconds) {
-		try {
-			TimeUnit.SECONDS.sleep(seconds);
-		} catch (InterruptedException intex) {
-			System.out.println(intex.getMessage());
-		}
-	}
-
 	private TestResult getTestResult(PostData postData) throws NullPointerException,InvalidTestStateException {
 		Gson gson = new Gson();
 		if (postData.test_id != null) {
@@ -75,5 +61,20 @@ public class PageSpeedTest extends HttpUtils implements TestResultDAO {
 			return testResult;
 		}
 		throw new NullPointerException();
+	}
+
+	@Override
+	public void saveAll(List<TestResult> testResultList) {
+		for (TestResult tr : testResultList){
+			save(tr);
+		}
+	}
+
+	private void pause(int seconds) {
+		try {
+			TimeUnit.SECONDS.sleep(seconds);
+		} catch (InterruptedException intex) {
+			System.out.println(intex.getMessage());
+		}
 	}
 }

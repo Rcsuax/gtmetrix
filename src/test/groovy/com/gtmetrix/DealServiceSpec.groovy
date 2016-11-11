@@ -1,12 +1,11 @@
 package com.gtmetrix
 
-import com.gtmetrix.DealBuilderService.DealFilter
 import spock.lang.Specification
 
 import java.text.SimpleDateFormat
 
 
-class DealFilterSpec extends Specification {
+class DealServiceSpec extends Specification {
 
 	def mockDealOne
 
@@ -41,7 +40,7 @@ class DealFilterSpec extends Specification {
 
 			def dealList= [mockDealOne,mockDealTwo,mockDealThree]
 		when:
-			def filter = new DealFilter().filterUpcomingDeals(dealList)
+			def filter = new DealService().filterUpcomingDeals(dealList)
 		then:
 			filter.contains(mockDealOne)
 		and:

@@ -21,7 +21,7 @@ public class ReportBuilder {
 
 		StringBuilder output = new StringBuilder("<h1>Sales that break the threshold: </h1>");
 		for (TestResult tr : results){
-			String url = tr.resources.getStrippedReportPdfFull();
+			String url = stripHttps(tr.resources.report_pdf_full);
 			output.append(String.format("%n<p>Deal Id: <b>%s</b><p>",tr.message.dealId));
 			output.append(String.format("<p>Html download time of %d ms</p>",tr.getHtmlDownloadTime()));
 			output.append(String.format("%n<p>Html size: %s bytes</p>",tr.results.html_bytes));
@@ -31,5 +31,9 @@ public class ReportBuilder {
 			output.append(String.format("%n<p>Download Full Report here: <a href='%s?username=%s&password=%s'>Sale Report</a> </p><hr>%n",url,user,key));
 		}
 		return output.toString();
+	}
+
+	public static String stripHttps(String s){
+		return s.replaceFirst("https://","");
 	}
 }

@@ -8,20 +8,20 @@ import java.util.*;
 
 public interface Database {
 
-    default Connection getConnection() throws SQLException {
-			Properties config = new Properties();
-
+    default Connection getConnection() {
+		Connection connection = null;
+		Properties config = new Properties();
+		InputStream in = ClassLoader.getSystemResourceAsStream("config.properties");
 		try {
-			InputStream in = ClassLoader.getSystemResourceAsStream("config.properties");
 			config.load(in);
 			String db_user = config.getProperty("db_user");
 			String db_pass = config.getProperty("db_password");
-			return DriverManager.getConnection("jdbc:mysql://localhost/gtmetrix?user=" + db_user + "&password=" + db_pass);
+			connection = DriverManager.getConnection("jdbc:mysql://localhost/gtmetrix?user=" + db_user + "&password=" + db_pass);
 		}
-		catch (IOException e){
+		catch (IOException | SQLException e){
 			System.out.println(e.getMessage());
-			throw new NullPointerException();
 		}
+		return connection;
     }
 
     default Date toSqlDate(java.util.Date date) {
