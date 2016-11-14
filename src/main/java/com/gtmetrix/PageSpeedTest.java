@@ -18,7 +18,7 @@ public class PageSpeedTest extends HttpUtils implements TestResultDAO {
 
 	@Override
 	public HttpGet getHttpGet(String testId) {
-		return new HttpGet("https://gtmetrix.com/api/0.1/test" + testId);
+		return new HttpGet("https://gtmetrix.com/api/0.1/test/" + testId);
 	}
 
 	@Override
@@ -72,20 +72,16 @@ public class PageSpeedTest extends HttpUtils implements TestResultDAO {
 			}
 
 			if (!Objects.equals(testResult.state, "completed")) {
-				pause(1);
+				try {
+					TimeUnit.SECONDS.sleep(1);
+				} catch (InterruptedException intex) {
+					System.out.println(intex.getMessage());
+				}
 				testResult = getTestResult(postResponse);
 			}
 			testResult.setTestId(postResponse.test_id);
 			return testResult;
 		}
 		throw new NullPointerException();
-	}
-
-	private void pause(int seconds) {
-		try {
-			TimeUnit.SECONDS.sleep(seconds);
-		} catch (InterruptedException intex) {
-			System.out.println(intex.getMessage());
-		}
 	}
 }

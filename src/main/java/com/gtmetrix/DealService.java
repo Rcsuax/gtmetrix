@@ -76,7 +76,7 @@ public class DealService implements DealDAO {
 		return dealList;
 	}
 
-	public InputStream stripNonValidXMLCharacters() {
+	public InputStream getValidInputStream() {
 		String in = null;
 		try {
 			URL url = new URL("https://www.secretescapes.com/feeds/upcoming");

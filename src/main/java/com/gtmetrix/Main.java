@@ -8,7 +8,7 @@ public class Main {
 	public static void main(String[] args) {
 
 		DealService service = new DealService();
-		InputStream inputStream = service.stripNonValidXMLCharacters();
+		InputStream inputStream = service.getValidInputStream();
 		List<Deal> dealList = service.getListOfDealsFromXML(inputStream);
 		List<Deal> dealsToTest = service.filterUpcomingDeals(dealList);
 		service.saveAll(dealsToTest);
