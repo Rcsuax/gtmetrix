@@ -3,12 +3,30 @@ package com.gtmetrix;
 import com.google.gson.Gson;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 
 import java.util.*;
 import java.util.concurrent.*;
 
 @SuppressWarnings("WeakerAccess")
 public class PageSpeedTest extends HttpUtils implements TestResultDAO {
+
+	@Override
+	public HttpPost getHttpPost() {
+		return new HttpPost("https://gtmetrix.com/api/0.1/test");
+	}
+
+	@Override
+	public HttpGet getHttpGet(String testId) {
+		return new HttpGet("https://gtmetrix.com/api/0.1/test" + testId);
+	}
+
+	@Override
+	public void saveAll(List<TestResult> testResultList) {
+		for (TestResult tr : testResultList){
+			save(tr);
+		}
+	}
 
 	public List<TestResult> testAllDeals(List<Message> queue) {
 		List<TestResult> testResults = new ArrayList<>();
@@ -24,10 +42,10 @@ public class PageSpeedTest extends HttpUtils implements TestResultDAO {
 		CloseableHttpResponse response = sendHttpRequest(getHttpPost(), message.url);
 		String postJsonData = readHttpResponse(response);
 
-		PostData postData = gson.fromJson(postJsonData, PostData.class);
+		PostResponse postResponse = gson.fromJson(postJsonData, PostResponse.class);
 
 		try {
-			TestResult result = getTestResult(postData);
+			TestResult result = getTestResult(postResponse);
 			result.message = message;
 
 			Query query = new Query();
@@ -41,10 +59,10 @@ public class PageSpeedTest extends HttpUtils implements TestResultDAO {
 		}
 	}
 
-	private TestResult getTestResult(PostData postData) throws NullPointerException,InvalidTestStateException {
+	private TestResult getTestResult(PostResponse postResponse) throws NullPointerException,InvalidTestStateException {
 		Gson gson = new Gson();
-		if (postData.test_id != null) {
-			HttpGet httpget = httpGetBuilder(postData.test_id);
+		if (postResponse.test_id != null) {
+			HttpGet httpget = getHttpGet(postResponse.test_id);
 			CloseableHttpResponse response = sendHttpRequest(httpget);
 			String getJsonData = readHttpResponse(response);
 
@@ -55,19 +73,12 @@ public class PageSpeedTest extends HttpUtils implements TestResultDAO {
 
 			if (!Objects.equals(testResult.state, "completed")) {
 				pause(1);
-				testResult = getTestResult(postData);
+				testResult = getTestResult(postResponse);
 			}
-			testResult.setTestId(postData.test_id);
+			testResult.setTestId(postResponse.test_id);
 			return testResult;
 		}
 		throw new NullPointerException();
-	}
-
-	@Override
-	public void saveAll(List<TestResult> testResultList) {
-		for (TestResult tr : testResultList){
-			save(tr);
-		}
 	}
 
 	private void pause(int seconds) {

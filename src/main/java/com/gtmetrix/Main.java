@@ -1,13 +1,15 @@
 package com.gtmetrix;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 public class Main {
 	public static void main(String[] args) {
 
 		DealService service = new DealService();
-		List<Deal> dealList = service.getListOfDealsFromXML();
+		InputStream inputStream = service.stripNonValidXMLCharacters();
+		List<Deal> dealList = service.getListOfDealsFromXML(inputStream);
 		List<Deal> dealsToTest = service.filterUpcomingDeals(dealList);
 		service.saveAll(dealsToTest);
 

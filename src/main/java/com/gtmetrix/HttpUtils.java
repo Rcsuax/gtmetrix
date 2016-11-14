@@ -18,11 +18,11 @@ import java.util.Properties;
 public abstract class HttpUtils {
 
 	public HttpPost getHttpPost(){
-        return new HttpPost("https://gtmetrix.com/api/0.1/test");
+        return new HttpPost();
     }
 
-    public HttpGet httpGetBuilder(String test_id) {
-        return new HttpGet("https://gtmetrix.com/api/0.1/test/"+ test_id);
+    public HttpGet getHttpGet(String testId) {
+        return new HttpGet();
     }
 
 	private CloseableHttpClient client() {
@@ -46,9 +46,9 @@ public abstract class HttpUtils {
 		}
 	}
 
-    public CloseableHttpResponse sendHttpRequest(HttpGet http_get) throws NullPointerException {
+    public CloseableHttpResponse sendHttpRequest(HttpGet httpGet) {
         try {
-            return client().execute(http_get);
+            return client().execute(httpGet);
         }
         catch (IOException ioe){
             System.out.print(ioe.getMessage());
@@ -56,14 +56,14 @@ public abstract class HttpUtils {
         }
     }
 
-    public CloseableHttpResponse sendHttpRequest(HttpPost http_post, String url) throws NullPointerException {
+    public CloseableHttpResponse sendHttpRequest(HttpPost httpPost, String url) {
         try {
             List<NameValuePair> formData = new ArrayList<>();
             formData.add(new BasicNameValuePair("url",url));
             formData.add(new BasicNameValuePair("x-metrix-adblock","0"));
 
-            http_post.setEntity(new UrlEncodedFormEntity(formData, Consts.UTF_8));
-            return client().execute(http_post);
+            httpPost.setEntity(new UrlEncodedFormEntity(formData, Consts.UTF_8));
+            return client().execute(httpPost);
         }
         catch (IOException ioe){
             System.out.print(ioe.getMessage());

@@ -24,7 +24,7 @@ public class DealService implements DealDAO {
 
 	public List<Deal> filterUpcomingDeals(List<Deal> dealList){
 		List<Deal> filteredList = new ArrayList<>();
-		for (Deal deal: dealList){
+		for (Deal deal : dealList){
 			try {
 				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm");
 				Date now = dateFormat.parse(dateFormat.format(new Date()));
@@ -42,13 +42,13 @@ public class DealService implements DealDAO {
 		return filteredList;
 	}
 
-	public List<Deal> getListOfDealsFromXML(){
+	public List<Deal> getListOfDealsFromXML(InputStream inputStream){
 		List<Deal> dealList = new ArrayList<>();
 		try {
 			DocumentBuilderFactory dbFac = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = dbFac.newDocumentBuilder();
 
-			Document doc = dBuilder.parse(stripNonValidXMLCharacters());
+			Document doc = dBuilder.parse(inputStream);
 			doc.getDocumentElement().normalize();
 
 			NodeList nList = doc.getElementsByTagName("deal");
@@ -76,12 +76,17 @@ public class DealService implements DealDAO {
 		return dealList;
 	}
 
-	private InputStream stripNonValidXMLCharacters() throws IOException {
-
-		URL url = new URL("https://www.secretescapes.com/feeds/upcoming");
-		InputStream input = url.openStream();
-		String in = org.apache.commons.io.IOUtils.toString(input,"utf-8");
-		input.close();
+	public InputStream stripNonValidXMLCharacters() {
+		String in = null;
+		try {
+			URL url = new URL("https://www.secretescapes.com/feeds/upcoming");
+			InputStream input = url.openStream();
+			in = org.apache.commons.io.IOUtils.toString(input,"utf-8");
+			input.close();
+		}
+		catch (IOException e){
+			System.out.println(e.getMessage());
+		}
 
 		StringBuilder out = new StringBuilder();
 		char current;
