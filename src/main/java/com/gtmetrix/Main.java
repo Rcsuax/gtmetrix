@@ -14,10 +14,8 @@ public class Main {
 		service.saveAll(dealsToTest);
 
 
-		Query query = new Query();
-		List<Message> testQueue = query.getAllDeals();
-
 		PageSpeedTest pageSpeed = new PageSpeedTest();
+		List<Message> testQueue = service.getAllDeals();
 		List<TestResult> testResults = pageSpeed.testAllDeals(testQueue);
 		pageSpeed.saveAll(testResults);
 

@@ -17,13 +17,9 @@ import java.util.Properties;
 @SuppressWarnings("WeakerAccess")
 public abstract class HttpUtils {
 
-	public HttpPost getHttpPost(){
-        return new HttpPost();
-    }
+	public abstract HttpPost getHttpPost();
 
-    public HttpGet getHttpGet(String testId) {
-        return new HttpGet();
-    }
+    public abstract HttpGet getHttpGet(String testId);
 
 	private CloseableHttpClient client() {
 		Properties config = new Properties();

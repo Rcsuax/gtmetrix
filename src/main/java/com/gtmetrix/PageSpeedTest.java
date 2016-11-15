@@ -32,6 +32,7 @@ public class PageSpeedTest extends HttpUtils implements TestResultDAO {
 		List<TestResult> testResults = new ArrayList<>();
 		for (Message message : queue) {
 			TestResult tr = testOneDeal(message);
+			new DealService().markDealTested();
 			if (tr != null) testResults.add(tr);
 		}
 		return testResults;
@@ -40,16 +41,12 @@ public class PageSpeedTest extends HttpUtils implements TestResultDAO {
 	public TestResult testOneDeal(Message message){
 		Gson gson = new Gson();
 		CloseableHttpResponse response = sendHttpRequest(getHttpPost(), message.url);
+
 		String postJsonData = readHttpResponse(response);
-
 		PostResponse postResponse = gson.fromJson(postJsonData, PostResponse.class);
-
 		try {
 			TestResult result = getTestResult(postResponse);
 			result.message = message;
-
-			Query query = new Query();
-			query.markDealTested();
 			return result;
 
 		} catch (NullPointerException | InvalidTestStateException e) {
@@ -59,9 +56,9 @@ public class PageSpeedTest extends HttpUtils implements TestResultDAO {
 		}
 	}
 
-	private TestResult getTestResult(PostResponse postResponse) throws NullPointerException,InvalidTestStateException {
+	private TestResult getTestResult(PostResponse postResponse) throws InvalidTestStateException {
 		Gson gson = new Gson();
-		if (postResponse.test_id != null) {
+		if (postResponse != null) {
 			HttpGet httpget = getHttpGet(postResponse.test_id);
 			CloseableHttpResponse response = sendHttpRequest(httpget);
 			String getJsonData = readHttpResponse(response);
@@ -82,6 +79,6 @@ public class PageSpeedTest extends HttpUtils implements TestResultDAO {
 			testResult.setTestId(postResponse.test_id);
 			return testResult;
 		}
-		throw new NullPointerException();
+		else throw new NullPointerException();
 	}
 }
