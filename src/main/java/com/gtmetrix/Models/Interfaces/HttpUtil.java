@@ -1,4 +1,4 @@
-package com.gtmetrix;
+package com.gtmetrix.Models.Interfaces;
 
 import org.apache.http.*;
 import org.apache.http.auth.AuthScope;

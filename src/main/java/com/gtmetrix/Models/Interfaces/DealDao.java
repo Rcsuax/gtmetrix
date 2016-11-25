@@ -1,4 +1,4 @@
-package com.gtmetrix.Interfaces;
+package com.gtmetrix.Models.Interfaces;
 
 import com.gtmetrix.Models.Deal;
 import com.gtmetrix.Models.Message;
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public interface DealDAO extends Database {
+public interface DealDao extends Database {
 
 	default void save(Deal deal) {
 		System.out.println("Updating Deals");

@@ -1,11 +1,12 @@
-package com.gtmetrix;
+package com.gtmetrix.Services;
 
 import com.google.gson.Gson;
-import com.gtmetrix.Interfaces.TestResultDAO;
+import com.gtmetrix.InvalidTestStateException;
+import com.gtmetrix.Models.Interfaces.HttpUtil;
+import com.gtmetrix.Models.Interfaces.TestResultDao;
 import com.gtmetrix.Models.Message;
 import com.gtmetrix.Models.PostResponse;
 import com.gtmetrix.Models.TestResult;
-import com.gtmetrix.Services.DealService;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
@@ -14,7 +15,7 @@ import java.util.*;
 import java.util.concurrent.*;
 
 @SuppressWarnings("WeakerAccess")
-public class PageSpeedTest extends HttpUtil implements TestResultDAO {
+public class PageSpeedService extends HttpUtil implements TestResultDao {
 
 	@Override
 	public HttpPost getHttpPost() {

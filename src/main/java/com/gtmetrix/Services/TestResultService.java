@@ -1,4 +1,4 @@
-package com.gtmetrix;
+package com.gtmetrix.Services;
 
 import com.gtmetrix.Models.TestResult;
 
@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SuppressWarnings("WeakerAccess")
-public class CheckThreshold {
+public class TestResultService {
 
     public List<TestResult> checkTestsForThresholdBreaches(List<TestResult> testResults) {
 		List<TestResult> listResult = new ArrayList<>();

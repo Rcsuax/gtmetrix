@@ -1,7 +1,7 @@
 package com.gtmetrix.Services;
 
 import com.gtmetrix.Models.Deal;
-import com.gtmetrix.Interfaces.DealDAO;
+import com.gtmetrix.Models.Interfaces.DealDao;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -22,7 +22,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class DealService implements DealDAO {
+public class DealService implements DealDao {
 
 	public List<Deal> filterUpcomingDeals(List<Deal> dealList){
 		List<Deal> filteredList = new ArrayList<>();

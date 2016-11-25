@@ -1,4 +1,4 @@
-package com.gtmetrix.Interfaces;
+package com.gtmetrix.Models.Interfaces;
 
 import java.io.*;
 import java.sql.*;

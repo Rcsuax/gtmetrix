@@ -1,6 +1,7 @@
 package com.gtmetrix
 
 import com.gtmetrix.Models.TestResult
+import com.gtmetrix.Services.TestResultService
 import spock.lang.Shared
 import spock.lang.Specification
 
@@ -19,7 +20,7 @@ class CheckThresholdSpec extends Specification {
 	TestResult mockTestResultThree
 
 	def setupSpec() {
-		checkThreshold = new CheckThreshold()
+		checkThreshold = new TestResultService()
 
 		mockTestResultOne = Stub {
 			getHtmlDownloadTime() >> 200

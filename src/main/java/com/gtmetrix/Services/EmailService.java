@@ -1,9 +1,8 @@
-package com.gtmetrix;
+package com.gtmetrix.Services;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -15,7 +14,7 @@ import java.util.Properties;
  * https://accounts.google.com/b/0/DisplayUnlockCaptcha
  */
 
-public class EmailSender {
+public class EmailService {
 
     public void send(String report){
 

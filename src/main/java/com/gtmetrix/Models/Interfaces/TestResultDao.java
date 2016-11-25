@@ -1,13 +1,12 @@
-package com.gtmetrix.Interfaces;
+package com.gtmetrix.Models.Interfaces;
 
-import com.gtmetrix.Interfaces.Database;
 import com.gtmetrix.Models.TestResult;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
-public interface TestResultDAO extends Database {
+public interface TestResultDao extends Database {
 
 	default void save(TestResult result){
 		System.out.println("updating TestResults");

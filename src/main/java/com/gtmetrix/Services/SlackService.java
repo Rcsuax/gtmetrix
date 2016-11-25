@@ -1,4 +1,4 @@
-package com.gtmetrix;
+package com.gtmetrix.Services;
 
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
@@ -29,7 +29,7 @@ public class SlackService {
 		return httpPost;
 	}
 
-	public CloseableHttpResponse sendSlackMessage(String message) {
+	public CloseableHttpResponse sendSlackMessage(String message) throws IOException {
 		CloseableHttpResponse response = null;
 		HttpPost httpPost = getHttpPost();
 		CloseableHttpClient httpClient = HttpClients.createDefault();
