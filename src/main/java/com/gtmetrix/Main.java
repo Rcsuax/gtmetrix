@@ -27,10 +27,13 @@ public class Main {
 		CheckThreshold check = new CheckThreshold();
 		List<TestResult> failedThresholdCheck = check.checkTestsForThresholdBreaches(testResults);
 
+		SlackService ss = new SlackService();
+
 		try {
 			String report = ReportBuilder.generateReport(failedThresholdCheck);
 			EmailSender sender = new EmailSender();
 			sender.send(report);
+			ss.sendSlackMessage(report);
 		}
 		catch (IllegalArgumentException | IOException e){
 			System.out.println(e.getMessage());

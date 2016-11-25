@@ -1,4 +1,4 @@
-package com.gtmetrix.Services;
+package com.gtmetrix;
 
 import org.apache.http.*;
 import org.apache.http.auth.AuthScope;
@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Properties;
 
 @SuppressWarnings("WeakerAccess")
-public abstract class HttpUtilService {
+public abstract class HttpUtil {
 
 	public abstract HttpPost getHttpPost();
 
