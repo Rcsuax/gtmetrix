@@ -1,5 +1,7 @@
 package com.gtmetrix;
 
+import com.gtmetrix.Models.TestResult;
+
 import java.util.ArrayList;
 import java.util.List;
 

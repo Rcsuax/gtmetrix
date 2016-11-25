@@ -1,4 +1,4 @@
-package com.gtmetrix;
+package com.gtmetrix.Models;
 
 public class Result {
 	public String page_load_time;

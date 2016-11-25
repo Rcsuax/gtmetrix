@@ -1,5 +1,7 @@
-package com.gtmetrix;
+package com.gtmetrix.Services;
 
+import com.gtmetrix.Models.Deal;
+import com.gtmetrix.Interfaces.DealDAO;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;

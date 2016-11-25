@@ -1,4 +1,7 @@
-package com.gtmetrix;
+package com.gtmetrix.Interfaces;
+
+import com.gtmetrix.Models.Deal;
+import com.gtmetrix.Models.Message;
 
 import java.sql.*;
 import java.util.ArrayList;

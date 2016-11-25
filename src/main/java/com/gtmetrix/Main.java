@@ -1,5 +1,10 @@
 package com.gtmetrix;
 
+import com.gtmetrix.Models.Deal;
+import com.gtmetrix.Models.Message;
+import com.gtmetrix.Models.TestResult;
+import com.gtmetrix.Services.DealService;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;

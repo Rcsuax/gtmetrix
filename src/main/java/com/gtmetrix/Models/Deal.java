@@ -1,4 +1,4 @@
-package com.gtmetrix;
+package com.gtmetrix.Models;
 
 import org.w3c.dom.Element;
 

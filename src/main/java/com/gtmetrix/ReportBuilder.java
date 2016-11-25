@@ -1,5 +1,7 @@
 package com.gtmetrix;
 
+import com.gtmetrix.Models.TestResult;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;

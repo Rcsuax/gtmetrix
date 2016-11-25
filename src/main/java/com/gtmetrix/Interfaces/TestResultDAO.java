@@ -1,4 +1,7 @@
-package com.gtmetrix;
+package com.gtmetrix.Interfaces;
+
+import com.gtmetrix.Interfaces.Database;
+import com.gtmetrix.Models.TestResult;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

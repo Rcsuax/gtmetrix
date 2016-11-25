@@ -1,5 +1,6 @@
 package com.gtmetrix
 
+import com.gtmetrix.Models.TestResult
 import spock.lang.Shared
 import spock.lang.Specification
 

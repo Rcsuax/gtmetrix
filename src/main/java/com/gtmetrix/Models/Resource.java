@@ -1,4 +1,4 @@
-package com.gtmetrix;
+package com.gtmetrix.Models;
 
 public class Resource {
 	public String report_pdf;

@@ -1,4 +1,4 @@
-package com.gtmetrix;
+package com.gtmetrix.Models;
 
 @SuppressWarnings("WeakerAccess")
 public final class Message {

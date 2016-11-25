@@ -1,5 +1,7 @@
 package com.gtmetrix
 
+import com.gtmetrix.Models.Deal
+import com.gtmetrix.Services.DealService
 import spock.lang.Specification
 
 import java.text.SimpleDateFormat
